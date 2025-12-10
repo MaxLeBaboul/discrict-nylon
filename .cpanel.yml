@@ -1,0 +1,12 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH="$HOME/public_html/"
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - if command -v node >/dev/null 2>&1; then /usr/bin/env npm ci && /usr/bin/env npm run build; fi
+    - /bin/cp -f dist/index.html "$DEPLOYPATH"
+    - /bin/cp -f dist/.htaccess "$DEPLOYPATH"
+    - /bin/cp -f dist/favicon.ico "$DEPLOYPATH"
+    - /bin/cp -f dist/robots.txt "$DEPLOYPATH"
+    - /bin/cp -f dist/placeholder.svg "$DEPLOYPATH" || true
+    - /bin/cp -R dist/assets "$DEPLOYPATH"
